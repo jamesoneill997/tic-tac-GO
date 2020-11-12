@@ -37,6 +37,19 @@ func drawBoard(tiles [9]string) {
 	}
 }
 
+func makeMove(currPlayer int, tiles [9]string) [9]string {
+	var move int
+	fmt.Scan(&move)
+
+	if currPlayer == 0 {
+		tiles[move] = "X"
+	} else {
+		tiles[move] = "O"
+	}
+
+	return tiles
+}
+
 //main func runs game logic
 func main() {
 	players := []string{createPlayer(), createPlayer()}
@@ -44,9 +57,20 @@ func main() {
 	player1 := players[0]
 	player2 := players[1]
 
-	intro(player1, player2)
-
 	tiles := [9]string{"0", "1", "2", "3", "4", "5", "6", "7", "8"}
 
 	drawBoard(tiles)
+
+	intro(player1, player2)
+
+	for i := 1; i <= 9; i++ {
+		if i%2 != 0 {
+			tiles = makeMove(0, tiles)
+		} else {
+			tiles = makeMove(1, tiles)
+		}
+
+		drawBoard(tiles)
+	}
+
 }
