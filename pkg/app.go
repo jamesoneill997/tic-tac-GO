@@ -56,7 +56,8 @@ func makeMove(currPlayer int, tiles [9]string) [9]string {
 	return tiles
 }
 
-func checkWinner(tiles [9]string) bool {
+//CheckWinner checks for winner, when true, game terminates
+func CheckWinner(tiles [9]string) bool {
 	return (tiles[0] == tiles[1] && tiles[1] == tiles[2]) || (tiles[3] == tiles[4] && tiles[4] == tiles[5]) || (tiles[6] == tiles[7] && tiles[7] == tiles[8]) || (tiles[1] == tiles[3] && tiles[3] == tiles[6]) || (tiles[4] == tiles[4] && tiles[4] == tiles[7]) || (tiles[2] == tiles[5] && tiles[5] == tiles[8]) || (tiles[0] == tiles[4] && tiles[4] == tiles[8]) || (tiles[2] == tiles[4] && tiles[4] == tiles[6])
 }
 
@@ -75,16 +76,16 @@ func main() {
 
 	currMove := 0
 
-	for currMove <= 9 && !checkWinner(tiles) {
+	for currMove <= 9 && !CheckWinner(tiles) {
 		drawBoard(tiles)
 		if currMove%2 != 0 {
 			tiles = makeMove(0, tiles)
-			if checkWinner(tiles) {
+			if CheckWinner(tiles) {
 				fmt.Println(player1 + " is the winner!")
 			}
 		} else {
 			tiles = makeMove(1, tiles)
-			if checkWinner(tiles) {
+			if CheckWinner(tiles) {
 				fmt.Println(player2 + " is the winner!")
 			}
 		}
